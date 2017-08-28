@@ -14,7 +14,7 @@ import com.mygdx.game.service.SoundService;
 
 public class Player extends Image {
     public final static float TURNING_SPEED = 20;
-    public static float GRAVITY = -10;
+    public static float GRAVITY = -15;
 
     private final static int WIDHT = Gdx.graphics.getWidth() / 8;
     private final static int HEIGHT = Gdx.graphics.getHeight() / 12;
@@ -80,13 +80,15 @@ public class Player extends Image {
 
     public void entitiesCollision(Rectangle enemyBounds, Enemy enemy, Rectangle obstacleBounds, SoundService soundService) {
         if (this.playerBounds.overlaps(enemyBounds)) {
+            enemy.setHit(true);
+            enemy.clearActions();
             Action parallelAction = Actions.parallel(Actions.moveBy(Gdx.graphics.getBackBufferWidth()/2, Gdx.graphics.getHeight(), 0.3f)
                     , Actions.rotateBy(720, 0.3f));
 
             enemy.addAction(parallelAction);
             enemyBounds.setPosition(0, Gdx.graphics.getHeight());
-            soundService.playEnemySound();
 
+            soundService.playEnemySound();
         }
 
         if (this.playerBounds.overlaps(obstacleBounds)) {

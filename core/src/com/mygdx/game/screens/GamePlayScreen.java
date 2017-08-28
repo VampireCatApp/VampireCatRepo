@@ -264,6 +264,7 @@ public class GamePlayScreen extends AbstractScreen {
         turnRightBtn.updatePosition(camera);
         flyBtn.updatePosition(camera);
         bgImg.setPosition(camera.position.x - WIDTH / 2, camera.position.y - HEIGHT / 2);
+        enemy.move(stage);
         sideWalls1.reposition(camera);
         sideWalls2.reposition(camera);
         enemy.reposition(camera);

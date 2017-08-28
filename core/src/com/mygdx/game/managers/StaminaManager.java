@@ -17,7 +17,7 @@ public class StaminaManager {
     public static final float THRESHOLD = 40;
     private static final float STARTING_STAMINA = 100;
     private static final float STARTING_MAX_STAMINA = 200;
-    private static final float STAMINA_CONSUMPTION = 8;
+    private static final float STAMINA_CONSUMPTION = 5;
     private Image staminaBar;
     private Image staminaThreshold;
     private Image staminaValue;
