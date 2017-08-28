@@ -273,7 +273,7 @@ public class GamePlayScreen extends AbstractScreen {
 
     private void checkForCollision() {
         player.wallsCollision();
-        player.entitiesCollision(enemy.getEnemyBounds(), enemy, obstacle.getObstacleBounds(), game.getSoundService());
+        player.entitiesCollision(enemy.getEnemyBounds(), enemy, obstacle.getObstacleBounds(), game.getSoundService(),staminaManager, game);
     }
 
 

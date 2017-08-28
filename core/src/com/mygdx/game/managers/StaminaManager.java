@@ -48,7 +48,7 @@ public class StaminaManager {
     }
 
     public void staminaIncrease(float velocity){
-        this.stamina+= velocity*(-1/2000f);
+        this.stamina+= velocity*(-1/4000f);
         if(stamina>maxStamina){
             stamina=maxStamina;
         }
@@ -65,6 +65,10 @@ public class StaminaManager {
 
     public float getStamina() {
         return stamina;
+    }
+
+    public void setStamina(float stamina) {
+        this.stamina = stamina;
     }
 
     public void flyingStart(){

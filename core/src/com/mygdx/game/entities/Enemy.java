@@ -88,17 +88,9 @@ public class Enemy extends Image {
             angle = (float) (MathUtils.radiansToDegrees * Math.atan2(sinProp,cosProp));
 
 
-            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.004f));
-            Action b = Actions.moveTo(newPosition.x, newPosition.y, 1.5f);
+            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.002f));
+            Action b = Actions.moveTo(newPosition.x, newPosition.y, 0.7f);
 
-
-
-            System.out.println(" angle : " + angle);
-
-            Image reddot = new Image(new Texture("reddot.png"));
-            reddot.setPosition(newPosition.x+1/2f*this.getWidth(), newPosition.y+1/2f*this.getHeight());
-            reddot.setSize(20, 20);
-            stage.addActor(reddot);
 
             this.addAction(Actions.sequence(a,b));
         }

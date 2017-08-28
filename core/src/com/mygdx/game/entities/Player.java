@@ -9,12 +9,15 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.mygdx.game.VampireCat;
+import com.mygdx.game.managers.StaminaManager;
 import com.mygdx.game.screens.GamePlayScreen;
+import com.mygdx.game.screens.SplashScreen;
 import com.mygdx.game.service.SoundService;
 
 public class Player extends Image {
-    public final static float TURNING_SPEED = 20;
-    public static float GRAVITY = -15;
+    public final static float TURNING_SPEED = 15;
+    public static float GRAVITY = -12;
 
     private final static int WIDHT = Gdx.graphics.getWidth() / 8;
     private final static int HEIGHT = Gdx.graphics.getHeight() / 12;
@@ -78,7 +81,7 @@ public class Player extends Image {
         this.horizontalSpeed = horizontalSpeed;
     }
 
-    public void entitiesCollision(Rectangle enemyBounds, Enemy enemy, Rectangle obstacleBounds, SoundService soundService) {
+    public void entitiesCollision(Rectangle enemyBounds, Enemy enemy, Rectangle obstacleBounds, SoundService soundService, StaminaManager staminaManager, VampireCat game) {
         if (this.playerBounds.overlaps(enemyBounds)) {
             enemy.setHit(true);
             enemy.clearActions();
@@ -87,7 +90,7 @@ public class Player extends Image {
 
             enemy.addAction(parallelAction);
             enemyBounds.setPosition(0, Gdx.graphics.getHeight());
-
+            staminaManager.setStamina(staminaManager.getStamina()+15);
             soundService.playEnemySound();
         }
 
@@ -97,6 +100,13 @@ public class Player extends Image {
             obstacleBounds.setPosition(0, Gdx.graphics.getHeight());
             velocity.set(velocity.x,-300,0);
             soundService.playObstacleSound();
+
+            if (staminaManager.getStamina()<staminaManager.THRESHOLD){
+                game.setScreen(new SplashScreen(game));
+            }
+            staminaManager.setStamina(staminaManager.getStamina()-50);
+
+
         }
     }
 
