@@ -22,6 +22,7 @@ public class Enemy extends Image {
     private final static float STARTING_Y = Gdx.graphics.getHeight() * (1 / 3f);
 
     private Rectangle enemyBounds;
+    private Boolean isOutOfScreen;
 
     public Enemy() {
 
@@ -38,10 +39,12 @@ public class Enemy extends Image {
     public void reposition(OrthographicCamera camera) {
         if (this.getY() > (camera.position.y + camera.viewportHeight / 2)) {
             //TO DELETE
-           // this.clearActions();
-           // this.setX(MathUtils.random(0,Gdx.graphics.getWidth()));
-           // this.setY(this.getY() - (camera.viewportHeight) * 1.5f);
-          //  this.enemyBounds.setPosition(this.getX(),this.getY());
+            this.clearActions();
+            Action action = Actions.rotateBy(-this.getRotation());
+            this.addAction(action);
+            this.setX(MathUtils.random(0,Gdx.graphics.getWidth()));
+            this.setY(this.getY() - (camera.viewportHeight) * 1.5f);
+            this.enemyBounds.setPosition(this.getX(),this.getY());
             
 
         }
