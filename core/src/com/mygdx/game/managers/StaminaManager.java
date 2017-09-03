@@ -18,6 +18,8 @@ public class StaminaManager {
     private static final float STARTING_STAMINA = 100;
     private static final float STARTING_MAX_STAMINA = 200;
     private static final float STAMINA_CONSUMPTION = 5;
+    private static final float SCALE=2/3f;
+
     private Image staminaBar;
     private Image staminaThreshold;
     private Image staminaValue;
@@ -33,16 +35,17 @@ public class StaminaManager {
         staminaBar = new Image(new Texture(Gdx.files.internal("staminabar.png")));
         staminaThreshold = new Image(new Texture(Gdx.files.internal("staminathreshold.png")));
         staminaValue = new Image(new Texture(Gdx.files.internal("staminavalue.png")));
-        staminaBar.setPosition(0, game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f));
-        staminaBar.setSize(GamePlayScreen.WIDTH,GamePlayScreen.HEIGHT*(1/24f));
+
+        staminaBar.setPosition(0, game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f));
+        staminaBar.setSize(GamePlayScreen.WIDTH*SCALE,GamePlayScreen.HEIGHT*(1/48f));
         game.getStage().addActor(staminaBar);
 
-        staminaValue.setPosition(game.WIDTH*(88/300f), game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f) + GamePlayScreen.HEIGHT*(1/24f)*(3/16f));
-        staminaValue.setSize(scaleStaminaValue(),GamePlayScreen.HEIGHT*(1/24f)*(10/16f));
+        staminaValue.setPosition(game.WIDTH*(88/300f)*SCALE, game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f) + GamePlayScreen.HEIGHT*(1/48f)*(3/16f));
+        staminaValue.setSize(scaleStaminaValue(),GamePlayScreen.HEIGHT*(1/48f)*(10/16f));
         game.getStage().addActor(staminaValue);
 
-        staminaThreshold.setPosition(game.WIDTH*(88/300f)+game.WIDTH*(THRESHOLD/300f),game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f) + GamePlayScreen.HEIGHT*(1/24f)*(3/16f));
-        staminaThreshold.setSize(GamePlayScreen.WIDTH*(1/100f),GamePlayScreen.HEIGHT*(1/24f)*(10/16f));
+        staminaThreshold.setPosition(game.WIDTH*(88/300f)+game.WIDTH*(THRESHOLD/300f),game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f) + GamePlayScreen.HEIGHT*(1/48f)*(3/16f));
+        staminaThreshold.setSize(GamePlayScreen.WIDTH*(1/100f),GamePlayScreen.HEIGHT*(1/48f)*(10/16f));
         game.getStage().addActor(staminaThreshold);
 
     }
@@ -81,20 +84,20 @@ public class StaminaManager {
 
     public void updateStaminaBarPosition(GamePlayScreen game){
 
-        staminaBar.setPosition(0, game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f));
+        staminaBar.setPosition(0, game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f));
     }
 
     public void updateStaminaValue(GamePlayScreen game) {
-        staminaValue.setPosition(game.WIDTH*(88/300f), game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f) + GamePlayScreen.HEIGHT*(1/24f)*(3/16f));
-        staminaValue.setSize(scaleStaminaValue(),GamePlayScreen.HEIGHT*(1/24f)*(10/16f));
+        staminaValue.setPosition(game.WIDTH*(88/300f)*SCALE, game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f) + GamePlayScreen.HEIGHT*(1/48f)*(3/16f));
+        staminaValue.setSize(scaleStaminaValue(),GamePlayScreen.HEIGHT*(1/48f)*(10/16f));
     }
 
     private float scaleStaminaValue(){
-        return stamina/maxStamina * 203/300f * GamePlayScreen.WIDTH;
+        return stamina/maxStamina * 203/300f * GamePlayScreen.WIDTH*SCALE;
 
     }
 
     public void updateStaminaThresholdPosition(GamePlayScreen game) {
-        staminaThreshold.setPosition(game.WIDTH*(88/300f)+game.WIDTH*(THRESHOLD/300f),game.getCamera().position.y + GamePlayScreen.HEIGHT*(11/24f) + GamePlayScreen.HEIGHT*(1/24f)*(3/16f));
+        staminaThreshold.setPosition(game.WIDTH*(88/300f)*SCALE+game.WIDTH*(THRESHOLD/300f)*SCALE,game.getCamera().position.y + GamePlayScreen.HEIGHT*(23/48f) + GamePlayScreen.HEIGHT*(1/48f)*(3/16f));
     }
 }
