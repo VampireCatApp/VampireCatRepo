@@ -20,7 +20,7 @@ public class Player extends Image {
     public static float GRAVITY = -12;
 
     private final static int WIDHT = Gdx.graphics.getWidth() / 8;
-    private final static int HEIGHT = Gdx.graphics.getHeight() / 12;
+    private final static int HEIGHT = Gdx.graphics.getHeight() / 10;
 
     private final static float STARTING_X = Gdx.graphics.getWidth() / 2;
     private final static float STARTING_Y = Gdx.graphics.getHeight() * (4 / 5f);
