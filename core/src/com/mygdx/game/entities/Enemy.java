@@ -88,7 +88,7 @@ public class Enemy extends Image {
             angle = (float) (MathUtils.radiansToDegrees * Math.atan2(sinProp,cosProp));
 
 
-            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.002f));
+            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.003f));
             Action b = Actions.moveTo(newPosition.x, newPosition.y, 0.7f);
 
 
