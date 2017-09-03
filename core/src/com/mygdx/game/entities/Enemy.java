@@ -18,8 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  */
 
 public class Enemy extends Image {
-    private final static int WIDHT = Gdx.graphics.getWidth() / 6;
-    private final static int HEIGHT = Gdx.graphics.getHeight() / 9;
+    private final static int WIDHT = Gdx.graphics.getWidth() / 9;
+    private final static int HEIGHT = Gdx.graphics.getHeight() / 13;
 
     private final static float STARTING_X = Gdx.graphics.getWidth() * (3 / 5f);
     private final static float STARTING_Y = Gdx.graphics.getHeight() * (1 / 3f);
@@ -88,7 +88,7 @@ public class Enemy extends Image {
             angle = (float) (MathUtils.radiansToDegrees * Math.atan2(sinProp,cosProp));
 
 
-            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.003f));
+            Action a = Actions.rotateBy(angle, Math.abs(angle * 0.002f));
             Action b = Actions.moveTo(newPosition.x, newPosition.y, 0.7f);
 
 

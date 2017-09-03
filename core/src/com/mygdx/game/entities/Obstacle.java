@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  */
 
 public class Obstacle extends Image {
-    private final static int WIDHT = Gdx.graphics.getWidth() / 2;
-    private final static int HEIGHT = Gdx.graphics.getHeight() / 24;
+    private final static int WIDHT = Gdx.graphics.getWidth() / 3;
+    private final static int HEIGHT = Gdx.graphics.getHeight() / 36;
 
     private final static float STARTING_X = 0;
     private final static float STARTING_Y = Gdx.graphics.getHeight() / 2;

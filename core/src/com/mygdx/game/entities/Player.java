@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.mygdx.game.VampireCat;
+import com.mygdx.game.managers.LvlManager;
 import com.mygdx.game.managers.StaminaManager;
 import com.mygdx.game.screens.GamePlayScreen;
 import com.mygdx.game.screens.SplashScreen;
@@ -81,7 +82,7 @@ public class Player extends Image {
         this.horizontalSpeed = horizontalSpeed;
     }
 
-    public void entitiesCollision(Rectangle enemyBounds, Enemy enemy, Rectangle obstacleBounds, SoundService soundService, StaminaManager staminaManager, VampireCat game) {
+    public void entitiesCollision(Rectangle enemyBounds, Enemy enemy, Rectangle obstacleBounds, SoundService soundService, StaminaManager staminaManager, LvlManager lvlManager, VampireCat game) {
         if (this.playerBounds.overlaps(enemyBounds)) {
             enemy.setHit(true);
             enemy.clearActions();
@@ -91,6 +92,7 @@ public class Player extends Image {
             enemy.addAction(parallelAction);
             enemyBounds.setPosition(0, Gdx.graphics.getHeight());
             staminaManager.setStamina(staminaManager.getStamina()+15);
+            lvlManager.setExp(lvlManager.getExp()+20);
             soundService.playEnemySound();
         }
 
@@ -104,7 +106,7 @@ public class Player extends Image {
             if (staminaManager.getStamina()<staminaManager.THRESHOLD){
                 game.setScreen(new SplashScreen(game));
             }
-            staminaManager.setStamina(staminaManager.getStamina()-50);
+            staminaManager.setStamina(staminaManager.getStamina()-40);
 
 
         }

@@ -15,6 +15,7 @@ import com.mygdx.game.entities.Enemy;
 import com.mygdx.game.entities.Obstacle;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.SideWalls;
+import com.mygdx.game.managers.LvlManager;
 import com.mygdx.game.managers.StaminaManager;
 import com.mygdx.game.ui.FlyButton;
 import com.mygdx.game.ui.IClickCallback;
@@ -37,6 +38,7 @@ public class GamePlayScreen extends AbstractScreen {
     private TurnRightButton turnRightBtn;
     private FlyButton flyBtn;
     private StaminaManager staminaManager;
+    private LvlManager lvlManager;
     private Boolean isFlyingClicked;
     private Boolean isFlying;
     private int counter;
@@ -66,14 +68,15 @@ public class GamePlayScreen extends AbstractScreen {
         initSideWalls();
         initObstacle();
         initEnemey();
-        initStaminaManager();
+        initManagers();
         initPlayer();
         initUIButtons();
         //initFont();
     }
 
-    private void initStaminaManager() {
+    private void initManagers() {
         this.staminaManager = new StaminaManager(this);
+        this.lvlManager = new LvlManager(this);
 
     }
 
@@ -84,11 +87,6 @@ public class GamePlayScreen extends AbstractScreen {
         label.setFontScale(WIDTH * (1 / 6f) / label.getWidth());
         label.setPosition(WIDTH * (2 / 3f), player.getY() + player.getHeight() + HEIGHT * (1 / 20f));
         stage.addActor(label);
-
-        //label2 = new Label("Stamina: " + MathUtils.round(staminaManager.getStamina()) + " / " + staminaManager.getMaxStamina(), skin);
-        //label2.setFontScale(WIDTH * (1 / 6f) / label.getWidth());
-        //label2.setPosition(100, player.getY() + player.getHeight() + HEIGHT * (1 / 20f));
-        //stage.addActor(label2);
 
     }
 
@@ -214,11 +212,12 @@ public class GamePlayScreen extends AbstractScreen {
         spriteBatch.end();
     }
 
-    private void staminaUpdate() {
+    private void staminaAndExpUpdate() {
         // MG how often stamina is updating
         if (player.getPosition().y < (HEIGHT * (11 / 15f) - HEIGHT * (1 / 15f) * counter)) {
             if (!isFlying) {
                 staminaManager.staminaIncrease(player.getVelocity().y);
+                lvlManager.expIncrease(player.getVelocity().y);
             }
             if (isFlyingClicked && isFlying && (staminaManager.getStamina() > 0)) {
                 staminaManager.staminaConsumption();
@@ -238,12 +237,17 @@ public class GamePlayScreen extends AbstractScreen {
 
     private void update() {
         uptadePositions();
-        staminaUpdate();
+        staminaAndExpUpdate();
 
-        //TODO stamina bar
+        //TODO set as one method
         staminaManager.updateStaminaBarPosition(this);
         staminaManager.updateStaminaValue(this);
         staminaManager.updateStaminaThresholdPosition(this);
+
+        lvlManager.updateExpValue(this);
+        lvlManager.updateLvlBarPosition(this);
+
+
 
         checkForCollision();
         camera.update();
@@ -253,9 +257,12 @@ public class GamePlayScreen extends AbstractScreen {
     }
 
     private void uptadePositions() {
-        //TODO without changing it cant detect colision as it is (with adding actions to player)
+        //TODO without changing it cant detect collision as it is (with adding actions to player)
         // it is caused by setting fixed values to Rectangle bounds as class field, no update
 
+
+        //TODO first check if stamina or exp i out of scope than update drawing
+        // in onUpgrade exp method
 
 
         player.move(Gdx.graphics.getDeltaTime());
@@ -273,7 +280,7 @@ public class GamePlayScreen extends AbstractScreen {
 
     private void checkForCollision() {
         player.wallsCollision();
-        player.entitiesCollision(enemy.getEnemyBounds(), enemy, obstacle.getObstacleBounds(), game.getSoundService(),staminaManager, game);
+        player.entitiesCollision(enemy.getEnemyBounds(), enemy, obstacle.getObstacleBounds(), game.getSoundService(),staminaManager, lvlManager, game);
     }
 
 
