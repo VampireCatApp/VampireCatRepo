@@ -71,7 +71,7 @@ public class GamePlayScreen extends AbstractScreen {
         initManagers();
         initPlayer();
         initUIButtons();
-        //initFont();
+        initFont();
     }
 
     private void initManagers() {
@@ -80,14 +80,12 @@ public class GamePlayScreen extends AbstractScreen {
 
     }
 
-    //TO DELETE (INDICATORS ONLY)
     private void initFont() {
         skin = new Skin(Gdx.files.internal("skin.json"));
-        label = new Label("VelocityY: " + MathUtils.round(player.getVelocity().y), skin);
-        label.setFontScale(WIDTH * (1 / 6f) / label.getWidth());
-        label.setPosition(WIDTH * (2 / 3f), player.getY() + player.getHeight() + HEIGHT * (1 / 20f));
+        label = new Label(Integer.toString(lvlManager.getLevel()), skin);
+        label.setFontScale(WIDTH * (1 / 120f) / label.getWidth());
+        label.setPosition(WIDTH * (1 / 3f), player.getY() + player.getHeight() + HEIGHT * (1 / 21f));
         stage.addActor(label);
-
     }
 
     private void startTheMusic() {
@@ -246,7 +244,8 @@ public class GamePlayScreen extends AbstractScreen {
 
         lvlManager.updateExpValue(this);
         lvlManager.updateLvlBarPosition(this);
-
+        label.setText(Integer.toString(lvlManager.getLevel()));
+        label.setPosition(WIDTH*(1/7f),camera.position.y+HEIGHT*(139/288f));
 
 
         checkForCollision();

@@ -14,6 +14,7 @@ import com.mygdx.game.screens.GamePlayScreen;
 public class StaminaManager {
     private float stamina;
     private float maxStamina;
+
     public static final float THRESHOLD = 40;
     private static final float STARTING_STAMINA = 100;
     private static final float STARTING_MAX_STAMINA = 200;
@@ -76,10 +77,6 @@ public class StaminaManager {
 
     public void flyingStart(){
         this.stamina-= 20;
-    }
-
-    public float getMaxStamina() {
-        return maxStamina;
     }
 
     public void updateStaminaBarPosition(GamePlayScreen game){
